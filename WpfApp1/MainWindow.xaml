@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+        <!-- Toplevel DataGrid that displays the column group headers -->
+        <DataGrid ItemsSource="{Binding Rows}"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False">
+
+            <!-- The grouped column definitions -->
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=Items[0].Columns[0].GroupHeader}"></TextBlock>
+                    </DataGridTemplateColumn.Header>
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type local:DataGridRowItem}">
+                            <DataGrid ItemsSource="{Binding Columns[0].TableData}"
+                      local:DataGridHelper.IsSynchronizeSelectedRowEnabled="True"
+                      local:DataGridHelper.SynchronizeGroupKey="A"
+                      RowHeaderWidth="0"
+                      BorderThickness="0" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate DataType="{x:Type local:DataGridRowItem}">
+                            <TextBox />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=Items[0].Columns[1].GroupHeader}"></TextBlock>
+                    </DataGridTemplateColumn.Header>
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type local:DataGridRowItem}">
+                            <DataGrid ItemsSource="{Binding Columns[1].TableData}"
+                      local:DataGridHelper.IsSynchronizeSelectedRowEnabled="True"
+                      local:DataGridHelper.SynchronizeGroupKey="A"
+                      RowHeaderWidth="0"
+                      BorderThickness="0" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate DataType="{x:Type local:DataGridRowItem}">
+                            <TextBox />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+</Window>
